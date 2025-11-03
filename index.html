@@ -17,9 +17,13 @@
       margin-bottom: 10px;
     }
 
+    .month {
+      margin-bottom: 50px;
+    }
+
     table {
       border-collapse: collapse;
-      margin: 20px auto;
+      margin: 0 auto 20px;
     }
 
     th, td {
@@ -50,62 +54,61 @@
   </style>
 </head>
 <body>
-
-  <h1>📅 2025年11月の日記</h1>
-
-  <table>
-    <tr>
-      <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
-    </tr>
-
-    <tr>
-      <td></td><td></td><td></td><td></td><td></td><td></td><td><a href="dailies/2025-11-01.html">1</a></td>
-    </tr>
-    <tr>
-      <td><a href="dailies/2025-11-02.html">2</a></td>
-      <td><a href="dailies/2025-11-03.html">3</a></td>
-      <td><a href="dailies/2025-11-04.html">4</a></td>
-      <td><a href="dailies/2025-11-05.html">5</a></td>
-      <td><a href="dailies/2025-11-06.html">6</a></td>
-      <td><a href="dailies/2025-11-07.html">7</a></td>
-      <td><a href="dailies/2025-11-08.html">8</a></td>
-    </tr>
-    <tr>
-      <td><a href="dailies/2025-11-09.html">9</a></td>
-      <td><a href="dailies/2025-11-10.html">10</a></td>
-      <td><a href="dailies/2025-11-11.html">11</a></td>
-      <td><a href="dailies/2025-11-12.html">12</a></td>
-      <td><a href="dailies/2025-11-13.html">13</a></td>
-      <td><a href="dailies/2025-11-14.html">14</a></td>
-      <td><a href="dailies/2025-11-15.html">15</a></td>
-    </tr>
-    <tr>
-      <td><a href="dailies/2025-11-16.html">16</a></td>
-      <td><a href="dailies/2025-11-17.html">17</a></td>
-      <td><a href="dailies/2025-11-18.html">18</a></td>
-      <td><a href="dailies/2025-11-19.html">19</a></td>
-      <td><a href="dailies/2025-11-20.html">20</a></td>
-      <td><a href="dailies/2025-11-21.html">21</a></td>
-      <td><a href="dailies/2025-11-22.html">22</a></td>
-    </tr>
-    <tr>
-      <td><a href="dailies/2025-11-23.html">23</a></td>
-      <td><a href="dailies/2025-11-24.html">24</a></td>
-      <td><a href="dailies/2025-11-25.html">25</a></td>
-      <td><a href="dailies/2025-11-26.html">26</a></td>
-      <td><a href="dailies/2025-11-27.html">27</a></td>
-      <td><a href="dailies/2025-11-28.html">28</a></td>
-      <td><a href="dailies/2025-11-29.html">29</a></td>
-    </tr>
-    <tr>
-      <td><a href="dailies/2025-11-30.html">30</a></td>
-      <td></td><td></td><td></td><td></td><td></td><td></td>
-    </tr>
-  </table>
+  <h1>📅 日記カレンダー</h1>
+  <div id="calendarContainer"></div>
 
   <footer>
     <p>© 2025 My Diary</p>
   </footer>
 
+  <script>
+    // === 設定 ===
+    const startYear = 2025;
+    const startMonth = 10; // 10月
+    const endYear = 2026;
+    const endMonth = 1; // 1月
+
+    const container = document.getElementById("calendarContainer");
+
+    // === カレンダー生成関数 ===
+    function generateCalendar(year, month) {
+      const firstDay = new Date(year, month - 1, 1);
+      const lastDay = new Date(year, month, 0).getDate();
+      const startWeekDay = firstDay.getDay();
+
+      let html = `<div class="month"><h2>${year}年${month}月</h2>`;
+      html += `<table><tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr><tr>`;
+
+      // 空白セル
+      for (let i = 0; i < startWeekDay; i++) {
+        html += "<td></td>";
+      }
+
+      // 日付セル
+      for (let day = 1; day <= lastDay; day++) {
+        const dateStr = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        html += `<td><a href="dailies/${dateStr}.html">${day}</a></td>`;
+        if ((startWeekDay + day) % 7 === 0) html += "</tr><tr>";
+      }
+
+      html += "</tr></table></div>";
+      return html;
+    }
+
+    // === 範囲内の全カレンダー生成 ===
+    let currentYear = startYear;
+    let currentMonth = startMonth;
+
+    while (currentYear < endYear || (currentYear === endYear && currentMonth <= endMonth)) {
+      container.innerHTML += generateCalendar(currentYear, currentMonth);
+
+      // 月を進める
+      currentMonth++;
+      if (currentMonth > 12) {
+        currentMonth = 1;
+        currentYear++;
+      }
+    }
+  </script>
 </body>
 </html>
