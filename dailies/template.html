@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YYYY-MM-DD-</title>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➊ここに今日の日付 -->
+  <title>YYYY-MM-DD</title>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➊ここに今日の日付 -->
   <link rel="stylesheet" href="../style.css" />
   <style>
     body {
@@ -61,6 +61,29 @@
     footer a:hover {
       text-decoration: underline;
     }
+    .photo-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .row img {
+      width: 45%;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .row img:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
@@ -68,15 +91,23 @@
     <h1>MM月DD日(D)</h1　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➋ここにも今日の日付(タイトル) -->
   </header>
 
-  <div class="photo-gallery">　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➌画像の日付を更新する -->
-    <img src="../images/YYYY-MM-DD.jpg"　　　　　　　　　　　　　　　　　　　　　　　　　
-      alt="写真(見えなかったら教えて)"
-      style="display:block; margin:20px auto; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.2);"
-      width="200">
+
+  <div class="photo-gallery">                                                      <!-- ←➌画像の日付とレイアウト -->
+  <!-- 1段目（横並び2枚） -->
+  <div class="row">
+    <img src="../images/YYYY-MM-DD-A.jpg">
+    <img src="../images/YYYY-MM-DD-A.jpg">
   </div>
+
+  <!-- 2段目（1枚） -->
+  <div class="row">
+    <img src="../images/YYYY-MM-DD-A.jpg">
+  </div>
+</div>
+
   
   <main>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➍ここに本文を -->
-    
+
   </main>
 
   <footer>
