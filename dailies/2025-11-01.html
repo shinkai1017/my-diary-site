@@ -86,7 +86,7 @@
     }
   </style>
 </head>
-<body>
+<body data-date="2025-11-01">
   <header>
     <h1>11月1日(土)</h1　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<!-- ←➋ここにも今日の日付(タイトル) -->
   </header>
@@ -169,6 +169,7 @@
   </main>
 
   <footer>
+    <div id="nav-links"></div>
     <p><a href="../index.html">カレンダーへ戻る</a></p>
   </footer>
   <script>
@@ -199,5 +200,32 @@
       });
     });
   </script>
+  <script>
+  const currentDate = document.body.dataset.date;
+
+  // 前後の日付を計算
+  const date = new Date(currentDate);
+  const prevDate = new Date(date);
+  prevDate.setDate(prevDate.getDate() - 1);
+
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + 1);
+
+  function format(d) {
+    const y = d.getFullYear();
+    const m = ("0" + (d.getMonth() + 1)).slice(-2);
+    const day = ("0" + d.getDate()).slice(-2);
+    return `${y}-${m}-${day}.html`;
+  }
+
+  const nav = document.getElementById("nav-links");
+
+  nav.innerHTML = `
+    <p>
+      <a href="${format(prevDate)}">← 前の日記</a>　
+      <a href="${format(nextDate)}">次の日記 →</a>
+    </p>
+  `;
+</script>
 </body>
 </html>
