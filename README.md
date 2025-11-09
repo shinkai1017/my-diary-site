@@ -1,1 +1,1 @@
-# my-diary-site
+# honmoto-private-journal
